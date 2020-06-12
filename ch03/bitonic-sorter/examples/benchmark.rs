@@ -1,6 +1,6 @@
 use num_cpus;
 
-use bitonic_sorter::forth::sort as par_sort;
+use bitonic_sorter::fourth::sort as par_sort;
 use bitonic_sorter::third::sort as seq_sort;
 use bitonic_sorter::utils::{is_sorted_ascending, new_u32_vec};
 use bitonic_sorter::SortOrder;
