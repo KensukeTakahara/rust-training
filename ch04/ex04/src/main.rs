@@ -1,7 +1,10 @@
+pub mod compound;
 pub mod scala;
 
-use scala::check;
+use compound::check as check_compound;
+use scala::check as check_scala;
 
 fn main() {
-    check();
+    check_scala();
+    check_compound();
 }
