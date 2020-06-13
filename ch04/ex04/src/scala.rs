@@ -109,6 +109,24 @@ fn check8() {
   assert_eq!(std::mem::size_of_val(&f), std::mem::size_of::<usize>());
 }
 
+fn check9() {
+  let x = 4;
+  let adder = |n| n + x;
+  assert_eq!(adder(2), 4 + 2);
+
+  let mut state = false;
+  let mut flipflop = || {
+    state = !state;
+    state
+  };
+
+  assert!(flipflop());
+  assert!(!flipflop());
+  assert!(flipflop());
+
+  assert!(state);
+}
+
 pub fn check() {
   check1();
   check2();
@@ -118,4 +136,5 @@ pub fn check() {
   check6();
   check7();
   check8();
+  check9();
 }
