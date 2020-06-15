@@ -1,3 +1,7 @@
+pub mod std_lib;
+
+use std_lib::check as std_lib_check;
+
 fn main() {
-    println!("Hello, world!");
+    std_lib_check();
 }
