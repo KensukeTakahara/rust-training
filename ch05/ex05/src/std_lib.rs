@@ -54,9 +54,33 @@ fn check4() {
   println!("v2 len: {}, capacity:{}", v2.len(), v2.capacity());
 }
 
+use std::collections::HashMap;
+
+fn check5() {
+  let mut m1 = HashMap::new();
+
+  m1.insert("a", 1);
+  m1.insert("b", 5);
+  assert_eq!(m1.len(), 2);
+
+  assert_eq!(m1.get("b"), Some(&5));
+  assert_eq!(m1.get("c"), None);
+
+  let d = m1.entry("d").or_insert(0);
+  *d += 7;
+  assert_eq!(m1.get("d"), Some(&7));
+
+  let m2 = vec![("a", 1), ("b", 3)]
+    .into_iter()
+    .collect::<HashMap<_, _>>();
+  assert_eq!(m2.len(), 2);
+  assert_eq!(m2.get("a"), Some(&1));
+}
+
 pub fn check() {
   check1();
   check2();
   check3();
   check4();
+  check5();
 }
