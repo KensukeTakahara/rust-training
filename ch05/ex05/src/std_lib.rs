@@ -77,10 +77,65 @@ fn check5() {
   assert_eq!(m2.get("a"), Some(&1));
 }
 
+fn check6() {
+  let mut s1 = "ラズベリー".to_string();
+  let mut s2 = String::from("ブラックベリー");
+
+  let s3 = "ストロベリー".to_owned();
+
+  s1.push_str("タルト");
+  assert_eq!(s1, "ラズベリータルト");
+
+  s2.push('と');
+  s2.push_str(&s3);
+  assert_eq!(s2, "ブラックベリーとストロベリー");
+}
+
+fn check7() {
+  let i = 42;
+  assert_eq!(i.to_string(), "42");
+
+  let f = 4.3 + 0.1;
+  assert_eq!(f.to_string(), "4.3999999999999995");
+  assert_eq!(format!("{:.2}", f), "4.40");
+
+  let t = (1, "ABC");
+  assert_eq!(format!("{:?}", t), r#"(1, "ABC")"#);
+}
+
+fn check8() {
+  let s1 = "42";
+  assert_eq!(s1.parse::<i32>(), Ok(42));
+
+  let s2 = "abc";
+  let r2: Result<f64, _> = s2.parse();
+  assert!(r2.is_err());
+  println!("{:?}", r2);
+}
+
+fn check9() {
+  let cs = ['t', 'r', 'u', 's', 't'];
+  assert_eq!(cs.iter().collect::<String>(), "trust");
+  assert_eq!(&cs[1..].iter().collect::<String>(), "rust");
+
+  let bad_utf8: [u8; 7] = [b'a', 0xf0, 0x90, 0x80, 0xe3, 0x81, 0x82];
+  let s = String::from_utf8_lossy(&bad_utf8);
+  assert_eq!(s, "a\u{fffd}あ");
+}
+
+fn f1(name: &str) -> String {
+  format!("Hello, {}!", name)
+}
+
 pub fn check() {
   check1();
   check2();
   check3();
   check4();
   check5();
+  check6();
+  check7();
+  check8();
+  check9();
+  println!("{}", f1("World"));
 }
