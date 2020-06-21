@@ -127,6 +127,24 @@ fn f1(name: &str) -> String {
   format!("Hello, {}!", name)
 }
 
+fn check10() {
+  let a = ['a', 'b', 'c', 'd', 'e'];
+
+  assert_eq!(a[..], ['a', 'b', 'c', 'd', 'e']);
+  assert_eq!(a[..3], ['a', 'b', 'c']);
+  assert_eq!(a[..=3], ['a', 'b', 'c', 'd']);
+  assert_eq!(a[1..], ['b', 'c', 'd', 'e']);
+  assert_eq!(a[1..3], ['b', 'c']);
+  assert_eq!(a[1..=3], ['b', 'c', 'd']);
+
+  assert_eq!(.., std::ops::RangeFull);
+  assert_eq!(..3, std::ops::RangeTo { end: 3 });
+  assert_eq!(..=3, std::ops::RangeToInclusive { end: 3 });
+  assert_eq!(1.., std::ops::RangeFrom { start: 1 });
+  assert_eq!(1..3, std::ops::Range { start: 1, end: 3 });
+  assert_eq!(1..=3, std::ops::RangeInclusive::new(1, 3));
+}
+
 pub fn check() {
   check1();
   check2();
@@ -138,4 +156,5 @@ pub fn check() {
   check8();
   check9();
   println!("{}", f1("World"));
+  check10();
 }
